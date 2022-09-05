@@ -12,7 +12,7 @@ jobs:
     trigger: true
   - task: cat-readme
     file: concourse-test-am/cat-readme.yml
-    concourse-test-am: concourse-test-am
+    #concourse-test-am: concourse-test-am
 #    config:
 #      platform: linux
 #      image_resource:
