@@ -1,0 +1,11 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: busybox
+inputs: # pass concourse-examples into this task step
+- name: concourse-test-am
+run:
+  path: cat
+  args: ["concourse-test-am/pipeline.yml"]
