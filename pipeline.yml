@@ -9,6 +9,7 @@ jobs:
 - name: read-the-readme
   plan:
   - get: concourse-test-am
+    trigger: true
   - task: cat-readme
     config:
       platform: linux
