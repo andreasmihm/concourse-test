@@ -21,4 +21,4 @@ jobs:
       - name: concourse-test-am
       run:
         path: cat
-        args: ["concourse-test-am/README.md"]
+        args: ["concourse-test-am/pipeline.yml"]
