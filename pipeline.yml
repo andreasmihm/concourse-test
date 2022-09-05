@@ -8,7 +8,7 @@ resources:
 jobs:
 - name: read-the-readme
   plan:
-  - get: oncourse-test-am
+  - get: concourse-test-am
   - task: cat-readme
     config:
       platform: linux
@@ -17,7 +17,7 @@ jobs:
         source:
           repository: busybox
       inputs: # pass concourse-examples into this task step
-      - name: oncourse-test-am
+      - name: concourse-test-am
       run:
         path: cat
-        args: ["oncourse-test-am/README.md"]
+        args: ["concourse-test-am/README.md"]
