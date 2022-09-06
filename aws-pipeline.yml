@@ -1,0 +1,44 @@
+resource_types:
+# Define credentials resource type
+- name: aws-credentials
+  type: registry-image
+  source:
+    repository: mps-docker-virtual.artifactory.platform.vwfs.io/public/concourse/resources/aws-credentials
+    tag: 1.2.0
+    username: ((artifactory-username))
+    password: ((artifactory-password))
+
+resources:
+- name: aws-example-dev
+  type: aws-credentials
+  source:
+    path: concourse/bentley-divae-sandbox/aws/sts/bentley-divae-sandbox-dev-GenericDeploymentRole 
+    role_id: ((bentley-divae-sandbox-dev-GenericDeploymentRole-role_id))
+    secret_id: ((bentley-divae-sandbox-dev-GenericDeploymentRole-secret_id))
+jobs:
+- name: vault-connection-test
+  plan:
+    - put: aws-example-dev
+    - task: test
+      config:
+        platform: linux
+        image_resource:
+          type: registry-image
+          source:
+            repository: dockerhub-docker-remote.artifactory.platform.vwfs.io/mesosphere/aws-cli
+            username: ((artifactory-username))
+            password: ((artifactory-password))
+            tag: latest
+
+        inputs:
+          - name: aws-example-dev
+
+        run:
+          path: /bin/sh
+          args:
+          - -excl
+          - |
+            source aws-example-dev/login.sh
+            aws s3 ls
+            aws lambda list-functions --region eu-central-1
+
