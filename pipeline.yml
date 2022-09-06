@@ -12,15 +12,3 @@ jobs:
     trigger: true
   - task: cat-readme
     file: concourse-test-am/cat-readme.yml
-    #concourse-test-am: concourse-test-am
-#    config:
-#      platform: linux
-#      image_resource:
-#        type: registry-image
-#       source:
-#          repository: busybox
-#      inputs: # pass concourse-examples into this task step
-#      - name: concourse-test-am
-#      run:
-#        path: cat
-#        args: ["concourse-test-am/pipeline.yml"]
